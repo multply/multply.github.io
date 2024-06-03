@@ -1,0 +1,176 @@
+body > * {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+}
+
+
+
+main {
+    height: 95%;
+}
+
+/* Only show decor circles above a certain size threshold */
+@media (max-width: 800px) {
+    .decor-circles {
+        display: none;
+    }
+}
+
+.decor-cricles {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+}
+
+.decor-circle {
+    position: absolute;
+    translate: -50% -50%;
+
+    height: var(--radius);
+    width: var(--radius);
+
+    display: inline-block;
+    border-radius: 50%;
+}
+
+#decor-circle-0 {
+    --radius: 250px;
+    margin-top: 70px;
+    margin-left: 70px;
+}
+
+#decor-circle-1 {
+    --radius: 125px;
+    margin-top: 200px;
+    margin-left: 20px;
+}
+
+#decor-circle-2 {
+    --radius: 65px;
+    margin-top: 220px;
+    margin-left: 150px;
+}
+
+#decor-circle-3 {
+    --radius: 40px;
+    margin-top: 100px;
+    margin-left: 240px;
+}
+
+#decor-circle-4 {
+    --radius: 80px;
+    margin-top: 20px;
+    margin-left: 208px;
+}
+
+.head-title {
+    position: absolute;
+
+    top: 5%;
+    right: 50%;
+
+    translate: 50% -50%;
+
+    z-index: 999;
+
+    text-align: center;
+    font-size: 50px;
+}
+
+.input-group {
+    position: absolute;
+
+    translate: 50% -50%;
+    right: 50%;
+
+    height: 100px;
+    width: 200px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.incdec-input {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+
+    width: 200px;
+    height: 50px;
+
+    line-height: 0px;
+}
+
+.incdec-button {
+    border: none;
+    outline: none;
+    background: none;
+
+    font-size: 30px;
+}
+
+.input-header {
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+
+.table-input-group {
+    top: 40%;
+}
+
+.time-input-group {
+    top: 60%;
+}
+
+.start-button {
+    position: absolute;
+
+    translate: 50% -50%;
+
+    top: 80%;
+    right: 50%;
+
+    height: 100px;
+    width: 200px;
+
+    font-size: 30px;
+
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+footer {
+    height: 5%;
+    top: 95%;
+}
+
+.footer-url {
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+
+    translate: 50% -50%;
+
+    right: 50%;
+    top: 50%;
+
+    height: 40px;
+    width: 250px;
+
+    text-align: center;
+
+    font-size: 20px;
+    line-height: 40px;
+}
