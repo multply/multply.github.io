@@ -1,0 +1,12 @@
+@font-face {
+    font-family: RobotoMono;
+    src: url("/source/assets/RobotoMono/RobotoMono-Regular.ttf");
+}
+
+body {
+    font-family: RobotoMono !important;
+}
+
+input, textarea, select, button {
+    font-family: inherit !important;
+} 
