@@ -115,7 +115,7 @@ function onFinished() {
     localStorage.setItem("resultRight", resultRight);
     localStorage.setItem("resultWrong", resultWrong);
 
-    window.location.href = "/docs/pages/result/index.html";
+    window.location.href = "/source/pages/result/index.html";
 }
 
 function onReturnClicked() {
