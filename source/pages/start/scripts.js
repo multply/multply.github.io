@@ -80,5 +80,5 @@ function onClickStart() {
     localStorage.setItem("table", tableList[tableIndex]);
     localStorage.setItem("time", timeList[timeIndex]);
 
-    window.location.href = "/docs/pages/main/index.html";
+    window.location.href = "/source/pages/main/index.html";
 }
