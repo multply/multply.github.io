@@ -32,7 +32,7 @@ if (TIME != "-1"){
 else {
     timerElement.innerHTML = "00:00";
     progressBar.style.background = "fixed";
-    progressBar.style.backgroundColor = "black";
+    progressBar.style.backgroundColor = "var(--color-detail)";
 }
 
 function onResponseInput() {
@@ -73,8 +73,8 @@ function onResponseSent(correct) {
 }
 
 function generateRequest() {
-    num1 = TABLE;
-    num2 = Math.floor((Math.random() * Math.max(10, TABLE)) + 1);
+    let num1 = TABLE;
+    let num2 = Math.floor((Math.random() * Math.max(10, TABLE)) + 1);
 
     requestAnswer = String(num1 * num2);
 
@@ -82,14 +82,14 @@ function generateRequest() {
 }
 
 function tickTimer(time) {
-    minutes = Math.floor(time / 60);
+    let minutes = Math.floor(time / 60);
 
-    seconds = time % 60;
-    secondsPadded = seconds < 10 ? `0${seconds}` : seconds;
+    let seconds = time % 60;
+    let secondsPadded = seconds < 10 ? `0${seconds}` : seconds;
 
     timerElement.innerHTML = `${minutes}:${secondsPadded}`;
 
-    progress = 100 * TIME / time;
+    let progress = 100 * time / TIME;
 
     progressBar.style.background = 
     `linear-gradient(

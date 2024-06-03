@@ -94,6 +94,7 @@ main {
 }
 
 .main-field {
+    outline-color: var(--color-detail);
     outline-style: dashed;
     outline-width: 3px;
 
