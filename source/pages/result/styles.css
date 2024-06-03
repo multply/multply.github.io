@@ -34,6 +34,8 @@ main {
 
     text-align: center;
     line-height: 100px;
+
+    color:  var(--color-detail);
 }
 
 .result-group {
@@ -47,6 +49,7 @@ main {
 
     translate: 50% -50%;
 
+    outline-color: var(--color-detail);
     outline-style: solid;
     outline-width: 4px;
 
@@ -67,6 +70,9 @@ main {
     line-height: 60px;
 
     font-size: 35px;
+
+    color:  var(--color-detail);
+
 }
 
 .result-info {
@@ -102,19 +108,19 @@ main {
 }
 
 #result-text-table {
-    color:  black;
+    color:  var(--color-detail);
 }
 
 #result-text-total {
-    color: black;
+    color:  var(--color-detail);
 }
 
 #result-text-right {
-    color: green;
+    color:  var(--color-response-valid);
 }
 
 #result-text-wrong {
-    color: red;
+    color:  var(--color-response-invalid);
 }
 
 .action-button {
@@ -131,6 +137,8 @@ main {
     background: none;
 
     font-size: 35px;
+
+    color: var(--color-detail);
 }
 
 #button-return {
@@ -159,4 +167,6 @@ footer {
     margin: 0;
 
     font-size: 20px;
+
+    color: var(--color-detail);
 }

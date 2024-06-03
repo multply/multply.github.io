@@ -94,10 +94,10 @@ function tickTimer(time) {
     progressBar.style.background = 
     `linear-gradient(
         to right,
-        black ${progress}%, 
-        black ${progress}%, 
-        grey ${progress}%, 
-        grey 100%)`;
+        var(--color-detail) ${progress}%, 
+        var(--color-detail) ${progress}%, 
+        var(--color-base-1) ${progress}%, 
+        var(--color-base-1) 100%)`;
 
     if (time <= 0){
         onFinished();

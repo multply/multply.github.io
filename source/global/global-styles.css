@@ -3,8 +3,18 @@
     src: url("/source/assets/RobotoMono/RobotoMono-Regular.ttf");
 }
 
+:root {
+    --color-base:             #3D405B;
+    --color-base-1:           #585B79;
+    --color-detail:           #F4F1DE;
+    --color-response-valid:   #81B29A;
+    --color-response-invalid: #E07A5F;
+}
+
 body {
     font-family: RobotoMono !important;
+
+    background-color: var(--color-base);
 }
 
 input, textarea, select, button {

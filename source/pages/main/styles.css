@@ -43,6 +43,8 @@ header {
     text-align: center;
 
     font-size: 75px;
+
+    color: var(--color-detail)
 }
 
 .header-return-button {
@@ -62,6 +64,8 @@ header {
     border: none;
 
     font-size: 80px;
+
+    color: var(--color-detail)
 }
 
 .timer-progress-bar {
@@ -76,10 +80,10 @@ header {
 
     background: linear-gradient(
         to right, 
-        black 70%, 
-        black 70%, 
-        grey 70%, 
-        grey 100%);
+        var(--color-detail) 70%, 
+        var(--color-detail) 70%, 
+        var(--color-base-1) 70%, 
+        var(--color-base-1) 100%);
 }
 
 
@@ -110,6 +114,8 @@ main {
     line-height: 100px;
 
     font-size: 60px;
+
+    color: var(--color-detail);
 }
 
 .request-field {
@@ -142,6 +148,8 @@ main {
     line-height: 100px;
 
     font-size: 70px;
+
+    color: var(--color-detail);
 }
 
 .result-group {
@@ -178,15 +186,16 @@ main {
 }
 
 #result-text-total {
-    color: black;
+    color: var(--color-detail);
 }
 
 #result-text-right {
-    color: green;
+    color: var(--color-response-valid);
+
 }
 
 #result-text-wrong {
-    color: red;
+    color: var(--color-response-invalid);
 }
 
 
@@ -212,4 +221,6 @@ footer {
 
     text-align: center;
     line-height: 50px;
+
+    color: var(--color-detail);
 }
