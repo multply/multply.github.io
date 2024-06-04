@@ -1,126 +1,114 @@
-const requestField = document.getElementById("request-field");
-const responseField = document.getElementById("response-field");
+import Format from "../../global/scripts/format.js";
 
-responseField.oninput = onResponseInput;
+const resultData = {
+    total: 0,
+    wrong: 0,
+    right: 0
+};
 
-const resultTotalText = document.getElementById("result-text-total");
-const resultRightText = document.getElementById("result-text-right");
-const resultWrongText = document.getElementById("result-text-wrong");
+const activeData = {
+    table: Number(localStorage.getItem("INPT_TABLE")) ?? 10,
+    answer: ""
+};
 
-let resultTotal = 0;
-let resultRight = 0;
-let resultWrong = 0;
+const elements = {
+    resultTotalText: document.getElementById("result-text-total"),
+    resultRightText: document.getElementById("result-text-right"),
+    resultWrongText: document.getElementById("result-text-wrong"),
+    responseInput: document.getElementById("response-input"),
+    requestText: document.getElementById("request-text")
+};
 
-const timerElement = document.getElementById("header-timer");
-const progressBar = document.getElementById("timer-progress-bar");
+(function addEvents() {
+    document.getElementById("header-return-button").addEventListener("click", _onReturnClicked);
+    elements.responseInput.addEventListener("input", _onResponseInput);
+})();
 
-const returnButton = document.getElementById("header-return-button");
+(function timerStart() {
+    const timerText = document.getElementById("header-timer");
+    const progressBar = document.getElementById("timer-progress-bar");
 
-returnButton.onclick = onReturnClicked;
-
-const TABLE = localStorage.getItem("table");
-const TIME = localStorage.getItem("time");
-
-let requestAnswer;
-
-generateRequest();
-
-if (TIME != "-1"){
-    tickTimer(parseInt(TIME));
-}
-
-else {
-    timerElement.innerHTML = "00:00";
-    progressBar.style.background = "fixed";
-    progressBar.style.backgroundColor = "var(--color-detail)";
-}
-
-function onResponseInput() {
-    const input = responseField.value;
-
-    if (input === requestAnswer) {
-        onResponseSent(true);
-        return;
-    }
-
-    for (let i = 0; i < input.length; i++) {
-        if (input[i] !== requestAnswer[i]) {
-            onResponseSent(false);
+    function timerTick(time) {
+        if(time < 1){
+            onFinished();
+            return;
         }
-    }
-}
 
-function onResponseSent(correct) {
-    requestAnswer = "-";
+        timerText.innerHTML = Format.timeFormat(time);
 
-    previousValue = "";
-    responseField.value = "";
+        const PROGRESS = (time / TIME) * 100;
+        progressBar.style.background = 
+            `linear-gradient(to right,
+            var(--color-detail) ${PROGRESS}%, 
+            var(--color-detail) ${PROGRESS}%, 
+            var(--color-base-1) ${PROGRESS}%, 
+            var(--color-base-1) 100%)`;
 
-    resultTotal += 1;
-    resultTotalText.innerHTML = `Total - ${resultTotal}`;
-
-    if (correct) {
-        resultRight += 1;
-        resultRightText.innerHTML = `Right - ${resultRight}`;
+        setTimeout(() => timerTick(time - 1), 1000);
     }
 
-    else {
-        resultWrong += 1;
-        resultWrongText.innerHTML = `Wrong - ${resultWrong}`;
-    }
+    const TIME = localStorage.getItem("INPT_TIME");
+    if (TIME == "-1"){
+        timerText.innerHTML = "00:00";
+        progressBar.style.background = "fixed";
+        progressBar.style.backgroundColor = "var(--color-detail)";
 
-    generateRequest();
-}
-
-function generateRequest() {
-    let num1 = TABLE;
-    let num2 = Math.floor((Math.random() * Math.max(10, TABLE)) + 1);
-
-    requestAnswer = String(num1 * num2);
-
-    requestField.innerHTML = `${num1}×${num2}`;
-}
-
-function tickTimer(time) {
-    let minutes = Math.floor(time / 60);
-
-    let seconds = time % 60;
-    let secondsPadded = seconds < 10 ? `0${seconds}` : seconds;
-
-    timerElement.innerHTML = `${minutes}:${secondsPadded}`;
-
-    let progress = 100 * time / TIME;
-
-    progressBar.style.background = 
-    `linear-gradient(
-        to right,
-        var(--color-detail) ${progress}%, 
-        var(--color-detail) ${progress}%, 
-        var(--color-base-1) ${progress}%, 
-        var(--color-base-1) 100%)`;
-
-    if (time <= 0){
-        onFinished();
         return;
     }
 
-    setTimeout(() => tickTimer(time - 1), 1000);
-}
+    timerTick(Number(TIME));
+})();
 
 function onFinished() {
-    localStorage.setItem("table", TABLE);
-    localStorage.setItem("time", TIME);
-
-    localStorage.setItem("resultTotal", resultTotal);
-    localStorage.setItem("resultRight", resultRight);
-    localStorage.setItem("resultWrong", resultWrong);
+    localStorage.setItem("RES_TOTAL", resultData.total);
+    localStorage.setItem("RES_RIGHT", resultData.right);
+    localStorage.setItem("RES_WRONG", resultData.wrong);
 
     window.location.href = "/source/pages/result/index.html";
 }
 
-function onReturnClicked() {
-    localStorage.setItem("table", TABLE);
-    localStorage.setItem("time", TIME);
+generateRequest();
 
+function generateRequest() {
+    const NUM_0 = activeData.table;
+    const NUM_1 = Math.floor((Math.random() * Math.max(10, NUM_0)) + 1);
+
+    elements.requestText.innerHTML = `${NUM_0}×${NUM_1}`;
+
+    activeData.answer = String(NUM_0 * NUM_1);
+}
+
+function _onResponseInput() {
+    const INPUT = elements.responseInput.value;
+    const ANSWER = activeData.answer;
+
+    if (INPUT === ANSWER) {
+        onAnswered(true);
+        return;
+    }
+
+    for (let i = 0; i < INPUT.length; i++) {
+        if (INPUT[i] !== ANSWER[i]) {
+            onAnswered(false);
+            return;
+        }
+    }
+}
+
+function onAnswered(correct) {
+    elements.responseInput.value = "";
+
+    resultData.total += 1;
+    resultData.right += correct ? 1 : 0;
+    resultData.wrong += correct ? 0 : 1;
+
+    elements.resultTotalText.innerHTML = `Total - ${resultData.total}`;
+    elements.resultRightText.innerHTML = `Right - ${resultData.right}`;
+    elements.resultWrongText.innerHTML = `Wrong - ${resultData.wrong}`;
+
+    generateRequest();
+}
+
+function _onReturnClicked() {
     window.location.href = "/index.html";
 }

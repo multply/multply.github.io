@@ -1,38 +1,29 @@
-const resultTextTable = document.getElementById("result-text-table");
-const resultTextTotal = document.getElementById("result-text-total");
-const resultTextRight = document.getElementById("result-text-right");
-const resultTextWrong = document.getElementById("result-text-wrong");
+import Format from "../../global/scripts/format.js";
 
-resultTextTable.innerHTML = `Table - ${getFormattedText(localStorage.getItem("table"))}`;
-resultTextTotal.innerHTML = `Total - ${getFormattedText(localStorage.getItem("resultTotal"))}`;
-resultTextRight.innerHTML = `Right - ${getFormattedText(localStorage.getItem("resultRight"))}`;
-resultTextWrong.innerHTML = `Wrong - ${getFormattedText(localStorage.getItem("resultWrong"))}`;
+(function writeText() {
+    const TABLE = localStorage.getItem("INPT_TABLE");
+    const TOTAL = localStorage.getItem("RES_TOTAL");
+    const RIGHT = localStorage.getItem("RES_RIGHT");
+    const WRONG = localStorage.getItem("RES_WRONG");
 
-const buttonReturn = document.getElementById("button-return");
-const buttonPlayAgain = document.getElementById("button-play-again");
+    const FORMAT_LENGTH = Math.max(TABLE.length, TOTAL.length, RIGHT.length, WRONG.length);
+    console.log(FORMAT_LENGTH);
 
-buttonReturn.onclick = onClickedReturn;
-buttonPlayAgain.onclick = onClickedPlayAgain;
+    document.getElementById("result-text-table").innerHTML = `Table - ${Format.wsFormat(TABLE, FORMAT_LENGTH, false)}`;
+    document.getElementById("result-text-total").innerHTML = `Total - ${Format.wsFormat(TOTAL, FORMAT_LENGTH, false)}`;
+    document.getElementById("result-text-right").innerHTML = `Right - ${Format.wsFormat(RIGHT, FORMAT_LENGTH, false)}`;
+    document.getElementById("result-text-wrong").innerHTML = `Wrong - ${Format.wsFormat(WRONG, FORMAT_LENGTH, false)}`;
+})();
 
-function getFormattedText(value) {
-    let result = "";
+(function addEvents() {
+    document.getElementById("button-return").addEventListener("click", _onClickedReturn);
+    document.getElementById("button-play-again").addEventListener("click", _onClickedPlayAgain);
+})();
 
-    if (value < 9) {
-        result = result + " ";
-    }
-
-    if (value < 99) {
-        result = result + " ";
-    }
-
-    result = result + value;
-    return result;
-}
-
-function onClickedReturn() {
+function _onClickedReturn() {
     window.location.href = "/index.html";
 }
 
-function onClickedPlayAgain() {
+function _onClickedPlayAgain() {
     window.location.href = "/source/pages/main/index.html";
 }

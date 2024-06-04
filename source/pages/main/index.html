@@ -2,53 +2,71 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="/source/global/global-styles.css">
+    <link rel="stylesheet" href="/source/global/styles/global-styles.css">
     <link rel="stylesheet" href="styles.css">
 
     <title>Multply - Practicing Times Tables</title>
+
 </head>
+
+
 
 <body>
     
     <header>
 
         <div class="header-top-row">
+
             <h1 class="header-timer" id="header-timer">00:00</h1>
+
             <button class="header-return-button" id="header-return-button">⇧</button>
+            
         </div>
+
 
         <div class="timer-progress-bar" id="timer-progress-bar"></div>
 
     </header>
 
+
+
     <main>
 
-        <!-- Main fields (center-center) - Request (e.g 12x17), "=" & Response(e.g 204) -->
-        <h2 class="main-field request-field" id="request-field">12×17</h2>
-        <h2 class="equal-sign">=</h2>
-        <input class="main-field response-field" id="response-field" autocomplete="off">
+        <h2 class="main-field request-text" id="request-text">12×17</h2>
 
-        <!-- Result fields (right-center) - Total, Right & Wrong answers -->
+        <h2 class="equal-sign">=</h2>
+
+        <input class="main-field response-input" id="response-input" autocomplete="off">
+
+
         <div class="result-group">
-            <h3 class="result-text" id="result-text-total">Total - 0  </h3>
+
             <h3 class="result-text" id="result-text-right">Right - 0  </h3>
+
             <h3 class="result-text" id="result-text-wrong">Wrong - 0  </h3>
+
+            <h3 class="result-text" id="result-text-total">Total - 0  </h3>
+
         </div>
 
     </main>
 
+
+
     <footer>
 
-        <!-- Footer url - "multply.github.io"-->
         <h3 class="footer-url">multply.github.io</h3>
 
     </footer>
 
-    <script src="scripts.js"></script>
+
+    
+    <script type="module" src="scripts.js"></script>
 
 </body>
 

@@ -1,84 +1,112 @@
-let tableIndex = 0;
-let timeIndex = 0;
+import Format from "../../global/scripts/format.js";
 
-const tableList = [
-    2, 3, 4, 5, 6, 7,
-    8, 9, 10, 11, 12,
-    13, 14
-];
-
-const timeList = [
-    -1, 30, 45, 60, 
-    90, 120, 150, 
-    180, 240, 300
-];
-
-const tableDisplay = document.getElementById("table-input-display");
-const timeDisplay = document.getElementById("time-input-display");
-
-document.getElementById("table-input-dec").addEventListener("click", () => onChangeTable(-1));
-document.getElementById("table-input-inc").addEventListener("click", () => onChangeTable(1));
-
-document.getElementById("time-input-dec").addEventListener("click", () => onChangeTime(-1));
-document.getElementById("time-input-inc").addEventListener("click", () => onChangeTime(1));
-
-document.getElementById("start-button").addEventListener("click", onClickStart);
-
-const PREV_TABLE = localStorage.getItem("table");
-const PREV_TIME = localStorage.getItem("time");
-
-if (PREV_TABLE != null) {
-    tableIndex = tableList.indexOf(Number(PREV_TABLE));
-}
-if (PREV_TIME != null) {
-    timeIndex = timeList.indexOf(Number(PREV_TIME));
-}
-
-displayText(tableDisplay, tableList[tableIndex]);
-displayText(timeDisplay, timeList[timeIndex], parseTimeValue);
-
-function wrapValue(val, max) {
-    if (val < 0) {
-        return max - 1;
+class InputSeries {
+    constructor() {
+        this.head = null;
+        this.tail = null;
     }
 
-    if (val >= max) {
-        return 0;
+    addElement(element) {
+        if (!this.head) {
+            this.head = element;
+            this.tail = element;
+            return;
+        }
+
+        element.prev = this.tail;
+        element.next = this.head;
+
+        this.tail.next = element;
+        this.head.prev = element;
+
+        this.tail = element;
     }
 
-    return val;
+    advance = () => this.head = this.head.next;
+    retreat = () => this.head = this.head.prev;
+    travel = (advance) => advance ? this.advance() : this.retreat();
 }
 
-function onChangeTable(inc) {
-    tableIndex = wrapValue(tableIndex + inc, tableList.length);
-    displayText(tableDisplay, tableList[tableIndex]);
-}
+class InputElement {
+    constructor(val, rep) {
+        this.val = val;
+        this.rep = rep;
 
-function onChangeTime(inc) {
-    timeIndex = wrapValue(timeIndex + inc, timeList.length);
-    displayText(timeDisplay, timeList[timeIndex], parseTimeValue);
-}
-
-function parseTimeValue(val) {
-    if(val == -1) {
-        return "∞";
+        this.next = null;
+        this.prev = null;
     }
-
-    minutes = Math.floor(val / 60);
-    seconds = val % 60;
-
-    secondsText = seconds < 10 ? `0${seconds}` : seconds;
-
-    return `${minutes}:${secondsText}`;
 }
 
-function displayText(element, value, parse = (val) => val) {
-    element.innerHTML = parse(value);
+const tablesList = (function createInputTable() {
+    const nTable = new InputSeries();
+
+    nTable.addElement(new InputElement(2,  "2"));
+    nTable.addElement(new InputElement(3,  "3"));
+    nTable.addElement(new InputElement(4,  "4"));
+    nTable.addElement(new InputElement(5,  "5"));
+    nTable.addElement(new InputElement(6,  "6"));
+    nTable.addElement(new InputElement(7,  "7"));
+    nTable.addElement(new InputElement(8,  "8"));
+    nTable.addElement(new InputElement(9,  "9"));
+    nTable.addElement(new InputElement(10, "10"));
+    nTable.addElement(new InputElement(11, "11"));
+    nTable.addElement(new InputElement(12, "12"));
+    nTable.addElement(new InputElement(13, "13"));
+    nTable.addElement(new InputElement(14, "14"));
+
+    return nTable;
+})();
+
+const timesList = (function createTimeTable() {
+    const nTable = new InputSeries();
+
+    nTable.addElement(new InputElement(-1,  "∞"));
+    nTable.addElement(new InputElement(15,  Format.timeFormat(15)));
+    nTable.addElement(new InputElement(30,  Format.timeFormat(30)));
+    nTable.addElement(new InputElement(45,  Format.timeFormat(45)));
+    nTable.addElement(new InputElement(60,  Format.timeFormat(60)));
+    nTable.addElement(new InputElement(90,  Format.timeFormat(90)));
+    nTable.addElement(new InputElement(120, Format.timeFormat(120)));
+    nTable.addElement(new InputElement(180, Format.timeFormat(180)));
+    nTable.addElement(new InputElement(240, Format.timeFormat(240)));
+    nTable.addElement(new InputElement(300, Format.timeFormat(300)));
+
+    return nTable;
+})();
+
+(function addEvents() {
+    document.getElementById("table-incdec-dec").addEventListener("click", () => _onChangeTable(false));
+    document.getElementById("table-incdec-inc").addEventListener("click", () => _onChangeTable(true));
+
+    document.getElementById("time-incdec-dec").addEventListener("click", () => _onChangeTime(false));
+    document.getElementById("time-incdec-inc").addEventListener("click", () => _onChangeTime(true));
+
+    document.getElementById("start-button").addEventListener("click", _onClickStart);
+})();
+
+const elements = {
+    tableText: document.getElementById("table-incdec-value-text"),
+    timeText: document.getElementById("time-incdec-value-text")
+};
+
+(function inputFieldsSetup() {
+    elements.tableText.innerHTML = tablesList.head.rep;
+    elements.timeText.innerHTML = timesList.head.rep;
+})();
+
+function _onChangeTable(advance) {
+    tablesList.travel(advance);
+    elements.tableText.innerHTML = tablesList.head.rep;
 }
 
-function onClickStart() {
-    localStorage.setItem("table", tableList[tableIndex]);
-    localStorage.setItem("time", timeList[timeIndex]);
+function _onChangeTime(advance) {
+    timesList.travel(advance);
+    elements.timeText.innerHTML = timesList.head.rep;
+}
+
+function _onClickStart() {
+    localStorage.setItem("INPT_TABLE", String(tablesList.head.val));
+    localStorage.setItem("INPT_TIME", String(timesList.head.val));
 
     window.location.href = "/source/pages/main/index.html";
 }

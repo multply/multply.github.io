@@ -123,7 +123,7 @@ main {
     color:  var(--color-response-invalid);
 }
 
-.action-button {
+.travel-button {
     position: absolute;
 
     right: 50%;
