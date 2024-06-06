@@ -75,7 +75,7 @@
 }
 
 .input-section {
-    flex-direction: column;
+    flex-direction: column !important;
 
     font-size: var(--text-size-3);
 
@@ -87,7 +87,7 @@
 }
 
 .input-field {
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
 .incdec-value-text {
