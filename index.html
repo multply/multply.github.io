@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <link rel="stylesheet" href="/source/global/styles/styles-colors.css">
+        <link rel="stylesheet" href="/source/global/styles/styles-global.css">
         <link rel="stylesheet" href="/source/global/styles/styles-text.css">
         <link rel="stylesheet" href="/source/pages/start/styles.css">
 
@@ -21,63 +22,89 @@
 
         <main>
 
-            <div class="decor-circles">
+            <div class="decor-circles -g-self-centered">
 
-                <div class="decor-circle" id="decor-circle-0"></div>
-                <div class="decor-circle" id="decor-circle-1"></div>
-                <div class="decor-circle" id="decor-circle-2"></div>
-                <div class="decor-circle" id="decor-circle-3"></div>
-                <div class="decor-circle" id="decor-circle-4"></div>
+                <div class="decor-circle -g-self-centered" id="decor-circle-0"></div>
+                <div class="decor-circle -g-self-centered" id="decor-circle-1"></div>
+                <div class="decor-circle -g-self-centered" id="decor-circle-2"></div>
+                <div class="decor-circle -g-self-centered" id="decor-circle-3"></div>
+                <div class="decor-circle -g-self-centered" id="decor-circle-4"></div>
 
             </div>
 
             
-            <h1 class="header-title">Multply</h1>
+            <h1 class="header-title -g-self-centered -g-flexbox">
+                <span>Multply</span>
+            </h1>
 
 
-            <div class="input-field" id="table-input-field">
+            <div class="input-section -g-self-centered -g-flexbox">
 
-                <h2 class="input-field-title">Table</h2>
+                <div class="input-section-element input-field -g-flexbox" id="table-input-field">
 
-                <div class="incdec-input-element">
-
-                    <button class="incdec-button" id="table-incdec-dec">-</button>
-
-                    <h2 class="incdec-value-text" id="table-incdec-value-text">2</h2>
+                    <h2 class="input-field-header -g-zero-spaced -g-flexbox">
+                        <span>Table</span>
+                    </h2>
+    
+                    <div class="-g-flexbox">
+    
+                        <button class="incdec-button -g-flexbox -g-borderless"" id="table-incdec-dec">
+                            <span>-</span>
+                        </button>
+    
+                        <h2 class="incdec-value-text -g-flexbox" id="table-incdec-value-text">
+                            <span>2</span>
+                        </h2>
+                        
+                        <button class="incdec-button -g-flexbox -g-borderless"" id="table-incdec-inc">
+                            <span>+</span>
+                        </button>
+    
+                    </div>
+    
+                </div>
+    
+    
+                <div class="input-section-element input-field -g-flexbox" id="time-input-field">
+    
+                    <h2 class="input-field-header -g-zero-spaced -g-flexbox">
+                        <span>Time</span>
+                    </h2>
+    
+                    <div class="-g-flexbox">
+    
+                        <button class="incdec-button -g-flexbox -g-borderless" id="time-incdec-dec">
+                            <span>-</span>
+                        </button>
+                        
+                        <h2 class="incdec-value-text -g-flexbox" id="time-incdec-value-text">
+                            <span>0:30</span>
+                        </h2>
+    
+                        <button class="incdec-button -g-flexbox -g-borderless"" id="time-incdec-inc">
+                            <span>+</span>
+                        </button>
+    
+                    </div>
                     
-                    <button class="incdec-button" id="table-incdec-inc">+</button>
-
                 </div>
 
+
+                <button class="input-section-element start-button -g-flexbox -g-borderless" id="start-button">
+                    <h2 class="-g-zero-spaced">Start</h2>
+                </button>
+
             </div>
-
-
-            <div class="input-field" id="time-input-field">
-
-                <h2 class="input-field-title">Time</h2>
-
-                <div class="incdec-input-element">
-
-                    <button class="incdec-button" id="time-incdec-dec">-</button>
-                    
-                    <h2 class="incdec-value-text" id="time-incdec-value-text">0:30</h2>
-
-                    <button class="incdec-button" id="time-incdec-inc">+</button>
-
-                </div>
-                
-            </div>
-
-
-            <button class="start-button" id="start-button">Start</button>
 
         </main>
 
 
 
-        <footer>
+        <footer class="-g-flexbox">
 
-            <h3 class="footer-url">multply.github.io</h3>
+            <h3 class="-g-footer-url">
+                <span>multply.github.io</span>
+            </h3>
 
         </footer>
 

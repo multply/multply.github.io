@@ -1,40 +1,11 @@
-body > * {
-    position: absolute;
-
-    right: 0;
-    top: 0;
-
-    margin: 0;
-    padding: 0;
-
-    width: 100%;
-}
-
-main {
-    height: 95%;
-    top: 0;
-}
-
 @media (max-width: 1000px) {
     .decor-circles {
         display: none;
     }
 }
 
-.decor-cricles {
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    margin: 0;
-    padding: 0;
-}
-
 .decor-circle {
-    position: absolute;
-
-    translate: -50% -50%;
+    --x-axis-amp: -1;
 
     height: var(--diameter);
     width: var(--diameter);
@@ -90,118 +61,33 @@ main {
 }
 
 .header-title {
-    position: absolute;
-
     top: 5%;
     right: 50%;
-
-    translate: 50% -50%;
-
-    text-align: center;
 
     font-size: var(--text-size-1);
 
     color: var(--color-detail);
 }
 
-.input-field {
-    position: absolute;
+.input-section {
+    flex-direction: column;
 
     right: 50%;
-
-    translate: 50% -50%;
-
-    height: 100px;
-    width: 200px;
-
-    text-align: center;
+    top: 55%;
 
     font-size: var(--text-size-3);
 
     color: var(--color-detail);
 }
 
-.incdec-input-element {
-    display: flex;
-    
-    flex-direction: row;
-    justify-content: space-evenly;
+.input-section-element {
+    margin: 35px 0;
+}
 
-    width: 200px;
-    height: 50px;
+.input-field {
+    flex-direction: column;
 }
 
 .incdec-value-text {
-    line-height: 0px;
-}
-
-.incdec-button {
-    border: none;
-    outline: none;
-    background: none;
-
-    font-size: var(--text-size-2);
-
-    color: var(--color-detail);
-}
-
-.input-field-title {
-    margin-top: 0;
-    margin-bottom: 0;
-
-}
-
-#table-input-field {
-    top: 40%;
-}
-
-#time-input-field {
-    top: 60%;
-}
-
-.start-button {
-    position: absolute;
-
-    top: 80%;
-    right: 50%;
-    
-    translate: 50% -50%;
-
-    height: 100px;
-    width: 200px;
-
-    font-size: var(--text-size-2);
-
-    border: none;
-    background: none;
-    box-shadow: none;
-
-    color: var(--color-detail);
-}
-
-footer {
-    height: 5%;
-    top: 95%;
-}
-
-.footer-url {
-    position: absolute;
-    
-    margin: 0;
-    padding: 0;
-
-    translate: 50% -50%;
-
-    right: 50%;
-    top: 50%;
-
-    height: 40px;
-    width: 250px;
-
-    text-align: center;
-
-    font-size: var(--text-size-3);
-    line-height: 40px;
-
-    color: var(--color-detail);
+    margin: 0 25px;
 }

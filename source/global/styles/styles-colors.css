@@ -10,3 +10,7 @@
 body {
     background-color: var(--color-base) !important;
 }
+
+input, textarea, select, button {
+    color: inherit;
+}
