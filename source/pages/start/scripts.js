@@ -1,4 +1,5 @@
-import Format from "../../global/scripts/format.js";
+import Format from "../../global/scripts/text-format.js";
+import Navigation from "../../global/scripts/page-navigation.js";
 
 class InputSeries {
     constructor() {
@@ -20,6 +21,15 @@ class InputSeries {
         this.head.prev = element;
 
         this.tail = element;
+    }
+
+    getElement(value) {
+        let current = this.tail;
+        while(current != this.head && current.val != value) {
+            current = current.prev;
+        }
+
+        return current;
     }
 
     advance = () => this.head = this.head.next;
@@ -74,6 +84,22 @@ const timesList = (function createTimeTable() {
     return nTable;
 })();
 
+(function loadPreviousInputData() {
+    const [TABLE, TIME] = Navigation.decodeURL(
+        Navigation.getCurrentURL(), 
+        (val) => Number(val), 
+        "table",
+        "time"
+    );
+
+    if (!TABLE || !TIME) {
+        return;
+    }
+
+    tablesList.head = tablesList.getElement(TABLE);
+    timesList.head = timesList.getElement(TIME);
+})();
+
 (function addEvents() {
     document.getElementById("table-incdec-dec").addEventListener("click", () => _onChangeTable(false));
     document.getElementById("table-incdec-inc").addEventListener("click", () => _onChangeTable(true));
@@ -97,16 +123,30 @@ const elements = {
 function _onChangeTable(advance) {
     tablesList.travel(advance);
     elements.tableText.innerHTML = tablesList.head.rep;
+    updateUrl();
 }
 
 function _onChangeTime(advance) {
     timesList.travel(advance);
     elements.timeText.innerHTML = timesList.head.rep;
+    updateUrl();
+}
+
+function updateUrl() {
+    const URL_ = Navigation.encodeURL(
+        Navigation.getCurrentURL(), 
+        Navigation.packet("table", tablesList.head.val),
+        Navigation.packet("time", timesList.head.val)
+    );
+    
+    Navigation.navigateToSilent(URL_);
 }
 
 function _onClickStart() {
-    localStorage.setItem("INPT_TABLE", String(tablesList.head.val));
-    localStorage.setItem("INPT_TIME", String(timesList.head.val));
-
-    window.location.href = "/source/pages/main/index.html";
+    const URL_ = Navigation.encodeURL(
+        Navigation.pathToURL("/source/pages/main/index.html"), 
+        Navigation.packet("table", tablesList.head.val),
+        Navigation.packet("time", timesList.head.val));
+    
+    Navigation.navigateTo(URL_);
 }

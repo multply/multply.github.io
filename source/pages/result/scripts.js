@@ -1,13 +1,29 @@
-import Format from "../../global/scripts/format.js";
+import Format from "../../global/scripts/text-format.js";
+import Navigation from "../../global/scripts/page-navigation.js";
+
+const outData = {
+    table: 0,
+    time: 0
+};
 
 (function writeText() {
-    const TABLE = localStorage.getItem("INPT_TABLE");
-    const TOTAL = localStorage.getItem("RES_TOTAL");
-    const RIGHT = localStorage.getItem("RES_RIGHT");
-    const WRONG = localStorage.getItem("RES_WRONG");
+    const [TABLE, TIME, [TOTAL, RIGHT, WRONG]] = Navigation.decodeURL(
+        Navigation.getCurrentURL(),
+        (val) => {
+            if(val[0] != "-") {
+                return val;
+            }
+            return val.substring(1).split("-");
+        },
+        "table",
+        "time",
+        "result"
+    );
+
+    outData.table = TABLE;
+    outData.time = TIME;
 
     const FORMAT_LENGTH = Math.max(TABLE.length, TOTAL.length, RIGHT.length, WRONG.length);
-    console.log(FORMAT_LENGTH);
 
     document.getElementById("result-text-table").innerHTML = `Table - ${Format.wsFormat(TABLE, FORMAT_LENGTH, false)}`;
     document.getElementById("result-text-total").innerHTML = `Total - ${Format.wsFormat(TOTAL, FORMAT_LENGTH, false)}`;
@@ -21,9 +37,21 @@ import Format from "../../global/scripts/format.js";
 })();
 
 function _onClickedReturn() {
-    window.location.href = "/index.html";
+    const URL_ = Navigation.encodeURL(
+        Navigation.pathToURL("/index.html"),
+        Navigation.packet("table", outData.table),
+        Navigation.packet("time", outData.time)
+    );
+
+    Navigation.navigateTo(URL_);
 }
 
 function _onClickedPlayAgain() {
-    window.location.href = "/source/pages/main/index.html";
+    const URL_ = Navigation.encodeURL(
+        Navigation.pathToURL("/source/pages/main/index.html"),
+        Navigation.packet("table", outData.table),
+        Navigation.packet("time", outData.time)
+    );
+
+    Navigation.navigateTo(URL_);
 }

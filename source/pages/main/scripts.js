@@ -1,4 +1,5 @@
-import Format from "../../global/scripts/format.js";
+import Format from "../../global/scripts/text-format.js";
+import Navigation from "../../global/scripts/page-navigation.js";
 
 const resultData = {
     total: 0,
@@ -7,8 +8,9 @@ const resultData = {
 };
 
 const activeData = {
-    table: Number(localStorage.getItem("INPT_TABLE")) ?? 10,
-    answer: ""
+    answer: "",
+    table: 0,
+    time: 0
 };
 
 const elements = {
@@ -24,6 +26,18 @@ const elements = {
     elements.responseInput.addEventListener("input", _onResponseInput);
 })();
 
+(function fetchStoredData() {
+    const [TABLE, TIME] = Navigation.decodeURL(
+        Navigation.getCurrentURL(),
+        (val) => Number(val),
+        "table",
+        "time"
+    );
+
+    activeData.time = TIME;
+    activeData.table = TABLE;
+})();
+
 (function timerStart() {
     const timerText = document.getElementById("header-timer");
     const progressBar = document.getElementById("timer-progress-bar");
@@ -36,7 +50,7 @@ const elements = {
 
         timerText.innerHTML = Format.timeFormat(time);
 
-        const PROGRESS = (time / TIME) * 100;
+        const PROGRESS = (time / activeData.time) * 100;
         progressBar.style.background = 
             `linear-gradient(to right,
             var(--color-detail) ${PROGRESS}%, 
@@ -47,8 +61,7 @@ const elements = {
         setTimeout(() => timerTick(time - 1), 1000);
     }
 
-    const TIME = localStorage.getItem("INPT_TIME");
-    if (TIME == "-1"){
+    if (activeData.time == -1){
         timerText.innerHTML = "00:00";
         progressBar.style.background = "fixed";
         progressBar.style.backgroundColor = "var(--color-detail)";
@@ -56,15 +69,20 @@ const elements = {
         return;
     }
 
-    timerTick(Number(TIME));
+    timerTick(activeData.time);
 })();
 
 function onFinished() {
-    localStorage.setItem("RES_TOTAL", resultData.total);
-    localStorage.setItem("RES_RIGHT", resultData.right);
-    localStorage.setItem("RES_WRONG", resultData.wrong);
+    const RESULT_PACKET = `-${resultData.total}-${resultData.right}-${resultData.wrong}`;
+    
+    const URL_ = Navigation.encodeURL(
+        Navigation.pathToURL("/source/pages/result/index.html"),
+        Navigation.packet("table", activeData.table),
+        Navigation.packet("time", activeData.time),
+        Navigation.packet("result", RESULT_PACKET)
+    );
 
-    window.location.href = "/source/pages/result/index.html";
+    Navigation.navigateTo(URL_);
 }
 
 generateRequest();
@@ -110,5 +128,11 @@ function onAnswered(correct) {
 }
 
 function _onReturnClicked() {
-    window.location.href = "/index.html";
+    const URL_ = Navigation.encodeURL(
+        Navigation.pathToURL("/index.html"),
+        Navigation.packet("table", activeData.table),
+        Navigation.packet("time", activeData.time)
+    );
+
+    Navigation.navigateTo(URL_);
 }
