@@ -4,6 +4,11 @@
     }
 }
 
+.decor-circles {
+    top: 0;
+    left: 0;
+}
+
 .decor-circle {
     --x-axis-amp: -1;
 
@@ -61,19 +66,16 @@
 }
 
 .header-title {
-    top: 5%;
-    right: 50%;
-
     font-size: var(--text-size-1);
 
     color: var(--color-detail);
+
+    margin-top: 0;
+    margin-bottom: 125px;
 }
 
 .input-section {
     flex-direction: column;
-
-    right: 50%;
-    top: 55%;
 
     font-size: var(--text-size-3);
 
