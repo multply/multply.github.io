@@ -88,12 +88,32 @@ function onFinished() {
 generateRequest();
 
 function generateRequest() {
-    const NUM_0 = activeData.table;
-    const NUM_1 = Math.floor((Math.random() * Math.max(10, NUM_0)) + 1);
+    function generate(iteration, prev) {
+        if(iteration > 100) {
+            return prev;
+        }
 
-    elements.requestText.innerHTML = `${NUM_0}×${NUM_1}`;
+        const NUM_0 = activeData.table;
+        const NUM_1 = Math.floor((Math.random() * Math.max(10, NUM_0)) + 1);
 
-    activeData.answer = String(NUM_0 * NUM_1);
+        const ANS = String(NUM_0 * NUM_1)
+
+        if(ANS === activeData.answer){
+            return generate(iteration + 1, ANS);
+        }
+
+        return [
+            NUM_0,
+            NUM_1,
+            ANS
+        ];
+    }
+
+    const [NUM_0_, NUM_1_, ANS_] = generate(0);
+
+    elements.requestText.innerHTML = `${NUM_0_}×${NUM_1_}`;
+    
+    activeData.answer = ANS_;
 }
 
 function _onResponseInput(event) {
