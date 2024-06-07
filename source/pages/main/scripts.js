@@ -23,7 +23,7 @@ const elements = {
 
 (function addEvents() {
     document.getElementById("header-return-button").addEventListener("click", _onReturnClicked);
-    elements.responseInput.addEventListener("input", _onResponseInput);
+    elements.responseInput.addEventListener("keyup", (event) => _onResponseInput(event));
 })();
 
 (function fetchStoredData() {
@@ -96,20 +96,24 @@ function generateRequest() {
     activeData.answer = String(NUM_0 * NUM_1);
 }
 
-function _onResponseInput() {
+function _onResponseInput(event) {
     const INPUT = elements.responseInput.value;
     const ANSWER = activeData.answer;
 
-    if (INPUT === ANSWER) {
-        onAnswered(true);
+    const KEY = event.key;
+
+    if(KEY === "Backspace"){
+        return;
+    }
+    
+    if (KEY === "Enter" && INPUT) {
+        onAnswered(INPUT === ANSWER);
         return;
     }
 
-    for (let i = 0; i < INPUT.length; i++) {
-        if (INPUT[i] !== ANSWER[i]) {
-            onAnswered(false);
-            return;
-        }
+    if(!/\d/.test(KEY)) {
+        elements.responseInput.value = INPUT.substring(0, INPUT.length - 1);
+        return;
     }
 }
 
