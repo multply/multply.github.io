@@ -32,9 +32,6 @@ main {
     text-align: center;
 
     white-space: pre;
-    
-    background: none;
-    border: none;
 
     font-size: var(--text-size-1);
 
