@@ -10,6 +10,13 @@ class Navigation {
         };
     }
 
+    static getPacket(id, def) {
+        return {
+            id: id,
+            def: def
+        };
+    }
+
     static encodeURL(base, ...packets) {
         const url = new URL(base);
 
@@ -23,14 +30,19 @@ class Navigation {
         return url.toString();
     }
 
-    static decodeURL(urlString, dataParsing = (val) => { }, ...identifiers) {
+    static decodeURL(urlString, dataParsing = (val) => { }, ...gets) {
         const url = new URL(urlString);
         const PARAMS = new URLSearchParams(url.search);
 
         const data = [];
         
-        Array.from(identifiers).forEach(id => {
-            const ENCODED = PARAMS.get(id);
+        Array.from(gets).forEach(getPacket => {
+            const ENCODED = PARAMS.get(getPacket.id);
+            if(!ENCODED) {
+                data.push(getPacket.def)
+                return;
+            }
+
             const DECODED = decodeURIComponent(ENCODED);
             const PARSED = dataParsing(DECODED);
 

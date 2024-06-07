@@ -88,16 +88,14 @@ const timesList = (function createTimeTable() {
     const [TABLE, TIME] = Navigation.decodeURL(
         Navigation.getCurrentURL(), 
         (val) => Number(val), 
-        "table",
-        "time"
+        Navigation.getPacket("table", 10),
+        Navigation.getPacket("time", 120)
     );
-
-    if (!TABLE || !TIME) {
-        return;
-    }
 
     tablesList.head = tablesList.getElement(TABLE);
     timesList.head = timesList.getElement(TIME);
+
+    updateUrl();
 })();
 
 (function addEvents() {

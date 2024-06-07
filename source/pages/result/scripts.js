@@ -13,11 +13,11 @@ const outData = {
             if(val[0] != "-") {
                 return val;
             }
-            return val.substring(1).split("-");
+            return val.substring(1).split("-") || [0, 0, 0];
         },
-        "table",
-        "time",
-        "result"
+        Navigation.getPacket("table", "10"),
+        Navigation.getPacket("time", "120"),
+        Navigation.getPacket("result", ["0", "0", "0"])
     );
 
     outData.table = TABLE;

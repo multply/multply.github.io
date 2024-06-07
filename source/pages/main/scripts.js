@@ -30,8 +30,8 @@ const elements = {
     const [TABLE, TIME] = Navigation.decodeURL(
         Navigation.getCurrentURL(),
         (val) => Number(val),
-        "table",
-        "time"
+        Navigation.getPacket("table", 10),
+        Navigation.getPacket("time", 120)
     );
 
     activeData.time = TIME;
@@ -112,7 +112,7 @@ function generateRequest() {
     const [NUM_0_, NUM_1_, ANS_] = generate(0);
 
     elements.requestText.innerHTML = `${NUM_0_}×${NUM_1_}`;
-    
+
     activeData.answer = ANS_;
 }
 
