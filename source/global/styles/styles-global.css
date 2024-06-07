@@ -1,3 +1,20 @@
+@media screen and (orientation: landscape) {
+    html {
+        position: absolute;
+      
+        top: 100%;
+        left: 0;
+
+        transform: rotate(-90deg);
+        transform-origin: left top;
+
+        width: 100vh;
+        height: 100vw;
+
+        overflow-x: hidden;
+    }
+}
+
 body {
     position: absolute;
 
