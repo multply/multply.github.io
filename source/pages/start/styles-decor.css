@@ -64,32 +64,3 @@
 
     background-color: var(--color-response-invalid);
 }
-
-.header-title {
-    font-size: var(--text-size-1);
-
-    color: var(--color-detail);
-
-    margin-top: 0;
-    margin-bottom: 125px;
-}
-
-.input-section {
-    flex-direction: column !important;
-
-    font-size: var(--text-size-3);
-
-    color: var(--color-detail);
-}
-
-.input-section-element {
-    margin: 35px 0;
-}
-
-.input-field {
-    flex-direction: column !important;
-}
-
-.incdec-value-text {
-    margin: 0 25px;
-}

@@ -1,0 +1,27 @@
+main {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+.header-text {
+    margin-top: 0;
+    margin-bottom: 125px;
+
+    font-size: var(--text-size-1);
+
+    color: var(--color-detail);
+}
+
+.travel-button {
+    margin: 20px 0;
+
+    font-size: var(--text-size-2);
+
+    color: var(--color-detail);
+}
+
+.footer-url {
+    font-size: var(--text-size-4);
+
+    color: var(--color-detail);
+}
