@@ -20,33 +20,25 @@
 
 <body>
     
-    <header>
 
-        <div class="header-top-row">
+    <main class="-g-flexbox">
 
-            <h1 class="header-timer" id="header-timer">00:00</h1>
+        <div class="header-top-row -g-flexbox">
 
-            <button class="header-return-button" id="header-return-button">←</button>
+            <button class="header-return-button -g-borderless -g-flexbox" id="header-return-button">
+                <span>←</span>
+            </button>
+
+            <h1 class="header-timer -g-flexbox" id="header-timer">
+                <span>00:00</spans>
+            </h1>
             
         </div>
 
 
         <div class="timer-progress-bar" id="timer-progress-bar"></div>
 
-    </header>
-
-
-
-    <main>
-
-        <h2 class="main-field request-text" id="request-text">12×17</h2>
-
-        <h2 class="equal-sign">=</h2>
-
-        <input class="main-field response-input" id="response-input" autocomplete="off">
-
-
-        <div class="result-group">
+        <div class="result-container -g-flexbox">
 
             <h3 class="result-text" id="result-text-right">Right - 0  </h3>
 
@@ -56,13 +48,28 @@
 
         </div>
 
+
+        <h2 class="main-field -g-flexbox" id="request-text">
+            <span>12×17</span>
+        </h2>
+
+
+        <h2 class="equal-sign -g-flexbox">
+            <span>=</span>
+        </h2>
+
+
+        <input class="main-field -g-flexbox" id="response-input" autocomplete="off">
+
     </main>
 
 
 
     <footer>
 
-        <h3 class="footer-url">multply.github.io</h3>
+        <h3 class="-g-footer-url -g-flexbox -g-zero-spaced">
+            <span>multply.github.io</span>
+        </h3>
 
     </footer>
 
