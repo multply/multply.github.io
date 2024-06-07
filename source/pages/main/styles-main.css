@@ -20,6 +20,11 @@ main {
 }
 
 .main-field {
+    display: inline-block;
+    box-sizing: border-box;
+
+    appearance: none;
+
     outline-color: var(--color-detail);
     outline-style: dashed;
     outline-width: 3px;
@@ -27,7 +32,8 @@ main {
     height: 100px;
     width: 200px;
 
-    margin: 15px 0;
+    margin: 15px 0 0 0;
+    padding: 0;
 
     text-align: center;
 
